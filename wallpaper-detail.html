@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wallpaper Details - Wallvoro</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(255,255,255,.95),transparent 25%),
+        radial-gradient(circle at 85% 35%,rgba(255,255,255,.85),transparent 28%),
+        linear-gradient(135deg,#e5f8ff 0%,#b9e8fa 48%,#dff8ff 100%);
+    color:#07152f;
+    min-height:100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    background:#0b122c;
+    min-height:85px;
+    padding:15px 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 5px 20px rgba(0,20,50,.22);
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.nav{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+}
+
+.search-box{
+    width:260px;
+    height:42px;
+    background:white;
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+}
+
+.search-box input{
+    border:0;
+    outline:none;
+    width:100%;
+    font-size:14px;
+}
+
+.search-icon,
+.mic-icon{
+    color:#07152f;
+    cursor:pointer;
+    margin-left:8px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1000px,92%);
+    margin:auto;
+    padding:28px 0 80px;
+}
+
+/* =========================
+   ADS
+========================= */
+
+.ad-box{
+    width:100%;
+    min-height:90px;
+    border:1px dashed #9db4c5;
+    border-radius:10px;
+    background:rgba(255,255,255,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    margin-bottom:25px;
+}
+
+.ad-box strong{
+    font-size:17px;
+}
+
+.ad-box span{
+    font-size:12px;
+    margin-top:6px;
+    color:#52657b;
+}
+
+/* =========================
+   WALLPAPER
+========================= */
+
+.wallpaper-card{
+    background:white;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 8px 25px rgba(0,40,80,.15);
+}
+
+.wallpaper-image{
+    width:100%;
+    display:block;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* Mobile ratio */
+.wallpaper-card.mobile .wallpaper-image{
+    aspect-ratio:9/16;
+}
+
+/* Desktop 16:9 */
+.wallpaper-card.desktop-16-9 .wallpaper-image{
+    aspect-ratio:16/9;
+}
+
+/* Desktop 16:10 */
+.wallpaper-card.desktop-16-10 .wallpaper-image{
+    aspect-ratio:16/10;
+}
+
+.wallpaper-info{
+    text-align:center;
+    padding:18px 10px 5px;
+}
+
+.wallpaper-title{
+    font-size:25px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.wallpaper-meta{
+    color:#52657b;
+    font-size:14px;
+}
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+.download-btn{
+    width:100%;
+    margin-top:18px;
+    border:0;
+    border-radius:9px;
+    background:#e21b23;
+    color:white;
+    padding:17px;
+    font-size:20px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.download-btn:hover{
+    background:#c9151c;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description{
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    margin-top:25px;
+    box-shadow:0 6px 20px rgba(0,40,80,.10);
+}
+
+.description h2{
+    font-size:21px;
+    margin-bottom:15px;
+}
+
+.description p{
+    line-height:1.7;
+    color:#26384f;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    background:#0b122c;
+    color:white;
+    padding:40px 25px 25px;
+    border-radius:28px 28px 0 0;
+    text-align:center;
+}
+
+.footer-logo{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.footer p{
+    color:#cbd5e1;
+    margin-bottom:22px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:22px;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+/* =========================
+   FULLSCREEN AD
+========================= */
+
+.ad-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(3,8,22,.97);
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:white;
+}
+
+.ad-overlay.show{
+    display:flex;
+}
+
+.full-ad{
+    width:min(90%,700px);
+    height:min(70vh,500px);
+    border:1px solid #65708a;
+    border-radius:14px;
+    background:#151d32;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    position:relative;
+}
+
+.ad-label{
+    font-size:13px;
+    color:#aeb8ca;
+    margin-bottom:15px;
+}
+
+.ad-text{
+    font-size:28px;
+    font-weight:700;
+}
+
+/* Countdown circle */
+
+.countdown-circle{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:4px solid #20a9ed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:800;
+    margin-top:25px;
+}
+
+/* Continue/Cancel */
+
+.continue-btn{
+    display:none;
+    margin-top:22px;
+    border:0;
+    border-radius:8px;
+    background:#20a9ed;
+    color:white;
+    padding:13px 30px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.continue-btn.show{
+    display:block;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .header{
+        min-height:70px;
+        padding:12px 15px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .search-box{
+        width:150px;
+        height:38px;
+    }
+
+    .container{
+        width:94%;
+        padding-top:20px;
+    }
+
+    .ad-box{
+        min-height:75px;
+    }
+
+    .wallpaper-title{
+        font-size:21px;
+    }
+
+    .description{
+        padding:20px;
+    }
+
+    .full-ad{
+        height:65vh;
+    }
+
+    .ad-text{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        WALLVORO
+    </a>
+
+    <nav class="nav">
+        <a href="index.html">HOME</a>
+        <a href="mobile.html">MOBILE</a>
+        <a href="#">LAPTOP/PC</a>
+        <a href="#">CATEGORIES</a>
+    </nav>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search wallpapers...">
+
+        <span class="search-icon">⌕</span>
+
+        <span class="mic-icon">🎙</span>
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <!-- TOP BANNER AD -->
+
+    <div class="ad-box">
+        <strong>BANNER AD SPOT</strong>
+        <span>728 × 90</span>
+    </div>
+
+
+    <!-- WALLPAPER -->
+
+    <section id="wallpaperCard" class="wallpaper-card">
+
+        <img
+            id="wallpaperImage"
+            class="wallpaper-image"
+            src="https://picsum.photos/1200/675?random=50"
+            alt="Wallvoro Wallpaper"
+        >
+
+        <div class="wallpaper-info">
+
+            <h1 class="wallpaper-title">
+                Premium Wallpaper
+            </h1>
+
+            <div class="wallpaper-meta">
+                <span id="downloadCount">0 Downloads</span>
+                •
+                <span id="ratioText">16:9</span>
+                •
+                <span id="sizeText">1920 × 1080</span>
+            </div>
+
+        </div>
+
+
+        <!-- DOWNLOAD -->
+
+        <button id="downloadButton" class="download-btn">
+            ↓ DOWNLOAD IN HD
+        </button>
+
+    </section>
+
+
+    <!-- SECOND BANNER -->
+
+    <div class="ad-box" style="margin-top:25px;">
+        <strong>BANNER AD SPOT</strong>
+        <span>728 × 90</span>
+    </div>
+
+
+    <!-- DESCRIPTION -->
+
+    <section class="description">
+
+        <h2>DESCRIPTION</h2>
+
+        <p>
+            This premium wallpaper is designed to give your screen
+            a clean and beautiful look. High-quality details,
+            vibrant colors and a premium visual style make it
+            perfect for your device. Download this wallpaper in
+            HD quality and enjoy it on your screen.
+        </p>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        WALLVORO
+    </div>
+
+    <p>
+        Premium Wallpapers for Every Screen Device
+    </p>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <br>
+
+    © 2026 Wallvoro. All Rights Reserved.
+
+</footer>
+
+
+<!-- FULLSCREEN AD -->
+
+<div id="adOverlay" class="ad-overlay">
+
+    <div class="full-ad">
+
+        <div class="ad-label">
+            SPONSORED AD
+        </div>
+
+        <div class="ad-text">
+            ADVERTISEMENT
+        </div>
+
+        <div id="countdownCircle" class="countdown-circle">
+            5
+        </div>
+
+        <button id="continueButton" class="continue-btn">
+            CONTINUE
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   DEVICE + RATIO DETECTION
+   URL EXAMPLES:
+
+   wallpaper-detail.html?device=mobile
+
+   wallpaper-detail.html?device=desktop&ratio=16:9
+
+   wallpaper-detail.html?device=desktop&ratio=16:10
+========================================= */
+
+const params = new URLSearchParams(window.location.search);
+
+const device = params.get("device") || "desktop";
+const ratio = params.get("ratio") || "16:9";
+
+const wallpaperCard =
+    document.getElementById("wallpaperCard");
+
+const wallpaperImage =
+    document.getElementById("wallpaperImage");
+
+const ratioText =
+    document.getElementById("ratioText");
+
+const sizeText =
+    document.getElementById("sizeText");
+
+
+/* =========================================
+   MOBILE WALLPAPER
+========================================= */
+
+if(device === "mobile"){
+
+    wallpaperCard.classList.add("mobile");
+
+    wallpaperImage.src =
+        "https://picsum.photos/600/1067?random=70";
+
+    ratioText.textContent = "9:16";
+
+    sizeText.textContent = "1080 × 1920";
+
+}
+
+
+/* =========================================
+   DESKTOP 16:10
+========================================= */
+
+else if(ratio === "16:10"){
+
+    wallpaperCard.classList.add("desktop-16-10");
+
+    wallpaperImage.src =
+        "https://picsum.photos/1200/750?random=80";
+
+    ratioText.textContent = "16:10";
+
+    sizeText.textContent = "1920 × 1200";
+
+}
+
+
+/* =========================================
+   DESKTOP 16:9
+========================================= */
+
+else{
+
+    wallpaperCard.classList.add("desktop-16-9");
+
+    wallpaperImage.src =
+        "https://picsum.photos/1200/675?random=50";
+
+    ratioText.textContent = "16:9";
+
+    sizeText.textContent = "1920 × 1080";
+
+}
+
+
+/* =========================================
+   5 SECOND FULLSCREEN AD
+   WHEN WALLPAPER PAGE OPENS
+========================================= */
+
+const adOverlay =
+    document.getElementById("adOverlay");
+
+const countdownCircle =
+    document.getElementById("countdownCircle");
+
+const continueButton =
+    document.getElementById("continueButton");
+
+
+let seconds = 5;
+
+
+/* Show ad after page loads */
+
+window.addEventListener("load",function(){
+
+    adOverlay.classList.add("show");
+
+    countdownCircle.textContent = seconds;
+
+    const timer = setInterval(function(){
+
+        seconds--;
+
+        if(seconds > 0){
+
+            countdownCircle.textContent = seconds;
+
+        }
+
+        else{
+
+            clearInterval(timer);
+
+            countdownCircle.textContent = "✓";
+
+            continueButton.classList.add("show");
+
+        }
+
+    },1000);
+
+});
+
+
+/* Continue to details */
+
+continueButton.addEventListener("click",function(){
+
+    adOverlay.classList.remove("show");
+
+});
+
+
+/* =========================================
+   DOWNLOAD BUTTON
+   5 SECOND DOWNLOAD AD
+========================================= */
+
+const downloadButton =
+    document.getElementById("downloadButton");
+
+downloadButton.addEventListener("click",function(){
+
+    let downloadSeconds = 5;
+
+    adOverlay.classList.add("show");
+
+    continueButton.classList.remove("show");
+
+    countdownCircle.textContent =
+        downloadSeconds;
+
+
+    const downloadTimer =
+        setInterval(function(){
+
+            downloadSeconds--;
+
+            if(downloadSeconds > 0){
+
+                countdownCircle.textContent =
+                    downloadSeconds;
+
+            }
+
+            else{
+
+                clearInterval(downloadTimer);
+
+                countdownCircle.textContent = "✓";
+
+                continueButton.classList.add("show");
+
+            }
+
+        },1000);
+
+
+    /* Download after countdown */
+
+    continueButton.onclick = function(){
+
+        adOverlay.classList.remove("show");
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            wallpaperImage.src;
+
+        link.download =
+            "wallvoro-wallpaper.jpg";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+    };
+
+});
+
+</script>
+
+</body>
+  </html>
