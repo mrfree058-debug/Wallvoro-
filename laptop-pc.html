@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wallvoro - Laptop & PC Wallpapers</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eaf9ff;
+    color:#17233a;
+    overflow-x:hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    background:#0b122c;
+    min-height:310px;
+    padding:65px 20px 45px;
+    border-radius:0 0 38px 38px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-shadow:0 12px 35px rgba(20,70,90,.16);
+}
+
+.logo{
+    color:#ffffff;
+    font-size:clamp(48px,8vw,78px);
+    font-weight:700;
+    letter-spacing:-3px;
+}
+
+.header-line{
+    width:360px;
+    max-width:65%;
+    height:4px;
+    background:#149fe9;
+    margin:22px 0 15px;
+    position:relative;
+    border-radius:20px;
+}
+
+.header-line::before,
+.header-line::after{
+    content:"";
+    width:13px;
+    height:13px;
+    background:#149fe9;
+    border-radius:50%;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.header-line::before{
+    left:-6px;
+}
+
+.header-line::after{
+    right:-6px;
+}
+
+.tagline{
+    color:#ffffff;
+    font-size:clamp(19px,3vw,28px);
+    font-weight:400;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+    padding:55px 24px 100px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    width:min(850px,100%);
+    height:88px;
+    margin:0 auto 38px;
+    background:#ffffff;
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+    box-shadow:0 8px 25px rgba(70,110,130,.10);
+}
+
+.search-icon{
+    font-size:39px;
+    margin-right:18px;
+}
+
+.search-input{
+    flex:1;
+    border:0;
+    outline:none;
+    background:transparent;
+    color:#657286;
+    font-size:27px;
+    min-width:0;
+}
+
+.search-input::placeholder{
+    color:#718096;
+}
+
+.mic{
+    font-size:34px;
+    cursor:pointer;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+    width:100%;
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:8px 4px 18px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:0 0 auto;
+    height:62px;
+    padding:0 28px;
+    border:1px solid #cbdde8;
+    border-radius:35px;
+    background:#ffffff;
+    color:#17233a;
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.2s ease;
+}
+
+.category.active{
+    background:#168fc8;
+    color:#ffffff;
+    border-color:#168fc8;
+}
+
+/* =========================
+   TOP BANNER AD
+========================= */
+
+.top-ad{
+    width:100%;
+    height:145px;
+    margin:42px 0 55px;
+    background:#e8f7fc;
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    box-shadow:0 7px 22px rgba(70,110,130,.08);
+}
+
+.ad-label{
+    font-size:17px;
+    letter-spacing:2px;
+    color:#7c8995;
+    margin-bottom:10px;
+}
+
+.ad-text{
+    font-size:25px;
+    color:#526477;
+}
+
+/* =========================
+   WALLPAPER GRID
+========================= */
+
+.wallpaper-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:42px 32px;
+    align-items:start;
+}
+
+/* =========================
+   WALLPAPER CARD
+========================= */
+
+.wallpaper-card{
+    background:#ffffff;
+    border-radius:27px;
+    padding:9px;
+    border:5px solid #ffffff;
+    box-shadow:0 8px 25px rgba(60,100,120,.12);
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.wallpaper-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(60,100,120,.18);
+}
+
+.wallpaper-card img{
+    display:block;
+    width:100%;
+    aspect-ratio:16 / 9;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+/* =========================
+   SPONSOR
+========================= */
+
+.sponsor-card{
+    background:#ffffff;
+    border-radius:27px;
+    padding:9px;
+    border:5px solid #ffffff;
+    min-height:100%;
+    aspect-ratio:16 / 9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(60,100,120,.12);
+}
+
+.sponsor-inner{
+    width:100%;
+    height:100%;
+    border-radius:18px;
+    background:#e8f7fc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.sponsor-label{
+    color:#718096;
+    font-size:16px;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.sponsor-title{
+    color:#526477;
+    font-size:24px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    width:100%;
+    background:#eaf9ff;
+    border-top:2px solid rgba(255,255,255,.9);
+    padding:65px 20px 75px;
+    text-align:center;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:22px 34px;
+    margin-bottom:30px;
+}
+
+.footer-links a{
+    color:#17233a;
+    text-decoration:none;
+    font-size:21px;
+}
+
+.copyright{
+    color:#17233a;
+    font-size:20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    .header{
+        min-height:310px;
+        padding:50px 15px 40px;
+        border-radius:0 0 34px 34px;
+    }
+
+    .logo{
+        font-size:58px;
+        letter-spacing:-3px;
+    }
+
+    .header-line{
+        width:360px;
+        max-width:60%;
+        margin-top:20px;
+    }
+
+    .tagline{
+        font-size:20px;
+    }
+
+    .main{
+        padding:42px 20px 90px;
+    }
+
+    .search-box{
+        height:88px;
+        padding:0 22px;
+        margin-bottom:35px;
+    }
+
+    .search-icon{
+        font-size:34px;
+        margin-right:13px;
+    }
+
+    .search-input{
+        font-size:24px;
+    }
+
+    .mic{
+        font-size:30px;
+    }
+
+    .categories{
+        gap:14px;
+    }
+
+    .category{
+        height:61px;
+        padding:0 26px;
+        font-size:19px;
+    }
+
+    .top-ad{
+        height:140px;
+        margin:40px 0 50px;
+        border-radius:28px;
+    }
+
+    .ad-text{
+        font-size:22px;
+    }
+
+    .wallpaper-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:32px 20px;
+    }
+
+    .wallpaper-card,
+    .sponsor-card{
+        border-radius:23px;
+        border-width:4px;
+        padding:7px;
+    }
+
+    .wallpaper-card img,
+    .sponsor-inner{
+        border-radius:16px;
+    }
+
+    .sponsor-title{
+        font-size:17px;
+    }
+
+    .sponsor-label{
+        font-size:12px;
+    }
+
+    .footer{
+        padding:60px 18px 70px;
+    }
+
+    .footer-links{
+        gap:22px 25px;
+    }
+
+    .footer-links a{
+        font-size:19px;
+    }
+
+    .copyright{
+        font-size:18px;
+    }
+}
+
+/* Larger screens */
+@media(min-width:1200px){
+
+    .main{
+        padding-left:45px;
+        padding-right:45px;
+    }
+
+    .wallpaper-grid{
+        gap:48px 38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">Wallvoro</div>
+
+    <div class="header-line"></div>
+
+    <div class="tagline">
+        Premium Wallpapers for Every Screen Device
+    </div>
+</header>
+
+
+<main class="main">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+
+        <input
+            id="searchInput"
+            class="search-input"
+            type="search"
+            placeholder="Search laptop & PC wallpapers..."
+        >
+
+        <span class="mic" id="micButton">🎤</span>
+    </div>
+
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+
+        <button class="category active" data-category="ratio16x9">
+            16:9
+        </button>
+
+        <button class="category" data-category="ratio16x10">
+            16:10
+        </button>
+
+        <button class="category" data-category="all">
+            ALL
+        </button>
+
+        <button class="category" data-category="latest">
+            LATEST
+        </button>
+
+        <button class="category" data-category="anime">
+            ANIME
+        </button>
+
+        <button class="category" data-category="aesthetic">
+            AESTHETIC
+        </button>
+
+        <button class="category" data-category="nature">
+            NATURE
+        </button>
+
+        <button class="category" data-category="cars">
+            CARS
+        </button>
+
+        <button class="category" data-category="minimal">
+            MINIMAL
+        </button>
+
+    </div>
+
+
+    <!-- ONLY TOP BANNER AD -->
+    <div class="top-ad">
+        <div class="ad-label">SPONSORED AD</div>
+        <div class="ad-text">Banner Ad Area</div>
+    </div>
+
+
+    <!-- WALLPAPERS -->
+    <div class="wallpaper-grid" id="wallpaperGrid">
+
+        <!-- WALLPAPER 1 -->
+        <div class="wallpaper-card" data-category="latest nature ratio16x9">
+            <img
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85"
+                alt="Nature Wallpaper"
+            >
+        </div>
+
+
+        <!-- WALLPAPER 2 -->
+        <div class="wallpaper-card" data-category="latest aesthetic ratio16x9">
+            <img
+                src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=85"
+                alt="Aesthetic Wallpaper"
+            >
+        </div>
+
+
+        <!-- SPONSOR AFTER 2 WALLPAPERS -->
+        <div class="sponsor-card">
+            <div class="sponsor-inner">
+                <div class="sponsor-label">SPONSORED</div>
+                <div class="sponsor-title">Sponsor Ad Area</div>
+            </div>
+        </div>
+
+
+        <!-- WALLPAPER 3 -->
+        <div class="wallpaper-card" data-category="anime ratio16x9">
+            <img
+                src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85"
+                alt="Anime Style Wallpaper"
+            >
+        </div>
+
+
+        <!-- WALLPAPER 4 -->
+        <div class="wallpaper-card" data-category="cars ratio16x10">
+            <img
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=85"
+                alt="Cars Wallpaper"
+            >
+        </div>
+
+
+        <!-- SPONSOR AFTER 4 WALLPAPERS -->
+        <div class="sponsor-card">
+            <div class="sponsor-inner">
+                <div class="sponsor-label">SPONSORED</div>
+                <div class="sponsor-title">Sponsor Ad Area</div>
+            </div>
+        </div>
+
+
+        <!-- WALLPAPER 5 -->
+        <div class="wallpaper-card" data-category="minimal aesthetic ratio16x10">
+            <img
+                src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=85"
+                alt="Minimal Wallpaper"
+            >
+        </div>
+
+
+        <!-- WALLPAPER 6 -->
+        <div class="wallpaper-card" data-category="nature latest ratio16x9">
+            <img
+                src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=85"
+                alt="Forest Wallpaper"
+            >
+        </div>
+
+
+        <!-- SPONSOR AFTER 6 WALLPAPERS -->
+        <div class="sponsor-card">
+            <div class="sponsor-inner">
+                <div class="sponsor-label">SPONSORED</div>
+                <div class="sponsor-title">Sponsor Ad Area</div>
+            </div>
+        </div>
+
+
+        <!-- WALLPAPER 7 -->
+        <div class="wallpaper-card" data-category="aesthetic ratio16x9">
+            <img
+                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85"
+                alt="Aesthetic Wallpaper"
+            >
+        </div>
+
+
+        <!-- WALLPAPER 8 -->
+        <div class="wallpaper-card" data-category="cars ratio16x10">
+            <img
+                src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1600&q=85"
+                alt="Car Wallpaper"
+            >
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <div class="copyright">
+        © 2026 Wallvoro. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+const categoryButtons =
+    document.querySelectorAll(".category");
+
+const wallpaperCards =
+    document.querySelectorAll(".wallpaper-card");
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        categoryButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        const selected =
+            button.dataset.category;
+
+        wallpaperCards.forEach(card => {
+
+            const categories =
+                card.dataset.category.split(" ");
+
+            if(
+                selected === "all" ||
+                categories.includes(selected)
+            ){
+                card.style.display = "";
+            }else{
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+
+    const query =
+        searchInput.value.toLowerCase().trim();
+
+    wallpaperCards.forEach(card => {
+
+        const image =
+            card.querySelector("img");
+
+        const alt =
+            image ? image.alt.toLowerCase() : "";
+
+        if(
+            query === "" ||
+            alt.includes(query)
+        ){
+            card.style.display = "";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+
+/* =========================
+   MICROPHONE
+========================= */
+
+const micButton =
+    document.getElementById("micButton");
+
+micButton.addEventListener("click", () => {
+
+    if(
+        "webkitSpeechRecognition" in window ||
+        "SpeechRecognition" in window
+    ){
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+        const recognition =
+            new SpeechRecognition();
+
+        recognition.lang = "en-IN";
+
+        recognition.start();
+
+        recognition.onresult = function(event){
+
+            searchInput.value =
+                event.results[0][0].transcript;
+
+            searchInput.dispatchEvent(
+                new Event("input")
+            );
+
+        };
+
+    }else{
+
+        alert("Voice search is not supported on this browser.");
+
+    }
+
+});
+
+
+/* =========================
+   WALLPAPER CLICK
+========================= */
+
+wallpaperCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        /*
+          Later, this will open the real
+          wallpaper detail/download page.
+        */
+
+        const image =
+            card.querySelector("img");
+
+        if(image){
+            const imageURL =
+                encodeURIComponent(image.src);
+
+            window.location.href =
+                "download.html?image=" + imageURL;
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
